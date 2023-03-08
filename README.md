@@ -25,56 +25,29 @@
   You can sarch sbom through sbomlc.db, for searching sbom used below command
 
     ./sbomex search --format json --spec cdx --tool trivy
-    +-----+-------------------------+---------+----------+--------------+
-    | ID  |         TARGET          | QUALITY |   TYPE   |   CREATOR    |
-    +-----+-------------------------+---------+----------+--------------+
-    |   5 | centos:latest           |    7.39 | cdx-json | trivy-0.36.1 |
-    +-----+-------------------------+---------+----------+--------------+
-    |  14 | centos:centos7.9.2009   |    7.38 | cdx-json | trivy-0.36.1 |
-    +-----+-------------------------+---------+----------+--------------+
-    |  23 | centos:centos7          |    7.38 | cdx-json | trivy-0.36.1 |
-    +-----+-------------------------+---------+----------+--------------+
-    |  32 | centos:7.9.2009         |    7.38 | cdx-json | trivy-0.36.1 |
-    +-----+-------------------------+---------+----------+--------------+
-    |  41 | centos:7                |    7.38 | cdx-json | trivy-0.36.1 |
-    +-----+-------------------------+---------+----------+--------------+
-    |  50 | centos:centos8.4.2105   |    7.39 | cdx-json | trivy-0.36.1 |
-    +-----+-------------------------+---------+----------+--------------+
-    |  59 | centos:centos8          |    7.39 | cdx-json | trivy-0.36.1 |
-    +-----+-------------------------+---------+----------+--------------+
-    |  68 | centos:centos6.10       |    7.38 | cdx-json | trivy-0.36.1 |
-    +-----+-------------------------+---------+----------+--------------+
-    |  77 | centos:centos6          |    7.38 | cdx-json | trivy-0.36.1 |
-    +-----+-------------------------+---------+----------+--------------+
-    |  86 | centos:8.4.2105         |    7.39 | cdx-json | trivy-0.36.1 |
-    +-----+-------------------------+---------+----------+--------------+
-    |  95 | busybox:latest          |    3.25 | cdx-json | trivy-0.36.1 |
-    +-----+-------------------------+---------+----------+--------------+
-    | 104 | busybox:uclibc          |    3.25 | cdx-json | trivy-0.36.1 |
-    +-----+-------------------------+---------+----------+--------------+
-    | 113 | busybox:musl            |    3.25 | cdx-json | trivy-0.36.1 |
-    +-----+-------------------------+---------+----------+--------------+
-    | 122 | busybox:glibc           |    3.25 | cdx-json | trivy-0.36.1 |
-    +-----+-------------------------+---------+----------+--------------+
-    | 131 | busybox:1-uclibc        |    3.25 | cdx-json | trivy-0.36.1 |
-    +-----+-------------------------+---------+----------+--------------+
-    | 140 | busybox:1-musl          |    3.25 | cdx-json | trivy-0.36.1 |
-    +-----+-------------------------+---------+----------+--------------+
-    | 149 | busybox:1-glibc         |    3.25 | cdx-json | trivy-0.36.1 |
-    +-----+-------------------------+---------+----------+--------------+
-    | 158 | busybox:1               |    3.25 | cdx-json | trivy-0.36.1 |
-    +-----+-------------------------+---------+----------+--------------+
-    | 167 | busybox:unstable-uclibc |    3.25 | cdx-json | trivy-0.36.1 |
-    +-----+-------------------------+---------+----------+--------------+
-    | 176 | busybox:unstable-glibc  |    3.25 | cdx-json | trivy-0.36.1 |
-    +-----+-------------------------+---------+----------+--------------+
-    | 185 | ubuntu:latest           |    7.47 | cdx-json | trivy-0.36.1 |
-    +-----+-------------------------+---------+----------+--------------+
-    | 194 | ubuntu:rolling          |    7.45 | cdx-json | trivy-0.36.1 |
-    +-----+-------------------------+---------+----------+--------------+
-    | 203 | ubuntu:lunar-20230128   |    7.40 | cdx-json | trivy-0.36.1 |
-    +-----+-------------------------+---------+----------+--------------+
-    | 212 | ubuntu:lunar            |    7.40 | cdx-json | trivy-0.36.1 |
-    +-----+-------------------------+---------+----------+--------------+
-    | 221 | ubuntu:kinetic-20230126 |    7.45 | cdx-json | trivy-0.36.1 |
-    +-----+-------------------------+---------+----------+--------------+  
+      ID   TARGET                   QUALITY  TYPE      CREATOR       
+  5    centos:latest            7.39     cdx-json  trivy-0.36.1  
+  14   centos:centos7.9.2009    7.38     cdx-json  trivy-0.36.1  
+  23   centos:centos7           7.38     cdx-json  trivy-0.36.1  
+  32   centos:7.9.2009          7.38     cdx-json  trivy-0.36.1  
+  41   centos:7                 7.38     cdx-json  trivy-0.36.1  
+  50   centos:centos8.4.2105    7.39     cdx-json  trivy-0.36.1  
+  59   centos:centos8           7.39     cdx-json  trivy-0.36.1  
+  68   centos:centos6.10        7.38     cdx-json  trivy-0.36.1  
+  77   centos:centos6           7.38     cdx-json  trivy-0.36.1  
+  86   centos:8.4.2105          7.39     cdx-json  trivy-0.36.1  
+  95   busybox:latest           3.25     cdx-json  trivy-0.36.1  
+  104  busybox:uclibc           3.25     cdx-json  trivy-0.36.1  
+  113  busybox:musl             3.25     cdx-json  trivy-0.36.1  
+  122  busybox:glibc            3.25     cdx-json  trivy-0.36.1  
+  131  busybox:1-uclibc         3.25     cdx-json  trivy-0.36.1  
+  140  busybox:1-musl           3.25     cdx-json  trivy-0.36.1  
+  149  busybox:1-glibc          3.25     cdx-json  trivy-0.36.1  
+  158  busybox:1                3.25     cdx-json  trivy-0.36.1  
+  167  busybox:unstable-uclibc  3.25     cdx-json  trivy-0.36.1  
+  176  busybox:unstable-glibc   3.25     cdx-json  trivy-0.36.1  
+  185  ubuntu:latest            7.47     cdx-json  trivy-0.36.1  
+  194  ubuntu:rolling           7.45     cdx-json  trivy-0.36.1  
+  203  ubuntu:lunar-20230128    7.40     cdx-json  trivy-0.36.1  
+  212  ubuntu:lunar             7.40     cdx-json  trivy-0.36.1  
+  221  ubuntu:kinetic-20230126  7.45     cdx-json  trivy-0.36.1 

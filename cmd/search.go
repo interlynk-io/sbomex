@@ -9,6 +9,7 @@ import (
 
 	"github.com/interlynk-io/sbomex/pkg/db"
 	"github.com/interlynk-io/sbomex/pkg/logger"
+	"github.com/interlynk-io/sbomex/pkg/view"
 
 	"github.com/spf13/cobra"
 )
@@ -30,7 +31,6 @@ This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		ctx := logger.WithLogger(context.Background())
-
 		processSearch(ctx)
 	},
 }
@@ -47,19 +47,24 @@ func init() {
 func processSearch(ctx context.Context) {
 	log := logger.FromContext(ctx)
 	log.Debugf("Processing search")
-
-	if format != "" && format != "json" && format != "xml" && format != "tv" {
-		fmt.Printf("invalid format")
+	if isInValidCMD() {
 		return
+	}
+	sbomlcDB, _ := db.NewSbomlc()
+	view.SearchView(ctx, sbomlcDB.Search(format, spec, tool, limit))
+
+}
+
+func isInValidCMD() bool {
+	if format != "" && format != "json" && format != "xml" && format != "tv" {
+		fmt.Printf("invalid spec")
+		return true
 	}
 
 	if spec != "" && spec != "spdx" && spec != "cdx" {
 		fmt.Printf("invalid spec")
-		return
+		return true
 	}
 
-	sbomlcDB, _ := db.NewSbomlc(db.SqliteDriver, db.SbomlcDataSource)
-	defer sbomlcDB.DB.Close()
-	sbomlcDB.Search(format, spec, tool, limit)
-
+	return false
 }
