@@ -11,6 +11,7 @@ import (
 	"log"
 
 	"github.com/interlynk-io/sbomex/pkg/model"
+	"github.com/interlynk-io/sbomex/pkg/utils"
 	_ "github.com/mattn/go-sqlite3"
 )
 
@@ -35,10 +36,10 @@ func NewSbomlc() (*SBOMLC, error) {
 	}, nil
 }
 
-func (sl *SBOMLC) Search(format, spec, tool string, limit int32) []model.SEARCH {
+func (sl *SBOMLC) Search(ca *model.CMDArgs) []model.SEARCH {
 	sbomex_results := []model.SEARCH{}
-	
-	rows, err := sl.DB.Query(search(format, spec, tool, limit))
+
+	rows, err := sl.DB.Query(search(ca.Format, ca.Spec, ca.Tool, ca.Limit))
 	if err != nil {
 		fmt.Printf("query execution failed %v", err)
 		return nil
@@ -54,4 +55,28 @@ func (sl *SBOMLC) Search(format, spec, tool string, limit int32) []model.SEARCH 
 		sbomex_results = append(sbomex_results, sbomex_result)
 	}
 	return sbomex_results
+}
+
+func (sl *SBOMLC) Url(ca *model.CMDArgs) string {
+	sbomex_results := []*model.SBOMS{}
+	var furl string
+	rows, err := sl.DB.Query(url(ca.Id, ca.Limit, ca.Tool))
+	if err != nil {
+		fmt.Printf("query execution failed %v", err)
+		return furl
+	}
+	defer rows.Close()
+
+	for rows.Next() {
+		sbomex_result := &model.SBOMS{}
+		if err := rows.Scan(&sbomex_result.ID, &sbomex_result.FileUrl); err != nil {
+			fmt.Printf("failed to fetch rows %v", err)
+			return furl
+		}
+		sbomex_results = append(sbomex_results, sbomex_result)
+	}
+	if len(sbomex_results) == 0 {
+		return furl
+	}
+	return sbomex_results[utils.RandomPick(0, len(sbomex_results))].FileUrl
 }

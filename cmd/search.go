@@ -9,6 +9,7 @@ import (
 
 	"github.com/interlynk-io/sbomex/pkg/db"
 	"github.com/interlynk-io/sbomex/pkg/logger"
+	"github.com/interlynk-io/sbomex/pkg/model"
 	"github.com/interlynk-io/sbomex/pkg/view"
 
 	"github.com/spf13/cobra"
@@ -37,7 +38,6 @@ to quickly create a Cobra application.`,
 
 func init() {
 	rootCmd.AddCommand(searchCmd)
-
 	searchCmd.Flags().StringVar(&format, "format", "", "Format options json/xml/tv")
 	searchCmd.Flags().StringVar(&spec, "spec", "", "Spec options spdx/cdx")
 	searchCmd.Flags().StringVar(&tool, "tool", "", "tool name")
@@ -51,7 +51,12 @@ func processSearch(ctx context.Context) {
 		return
 	}
 	sbomlcDB, _ := db.NewSbomlc()
-	view.SearchView(ctx, sbomlcDB.Search(format, spec, tool, limit))
+	view.SearchView(ctx, sbomlcDB.Search(&model.CMDArgs{
+		Format: format,
+		Spec:   spec,
+		Tool:   tool,
+		Limit:  limit,
+	}))
 
 }
 

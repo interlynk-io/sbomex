@@ -39,3 +39,21 @@ func search(format, spec, tool string, limit int32) string {
 	query += " limit " + fmt.Sprint(limit)
 	return query
 }
+
+func url(id, limit int32, tool string) string {
+	query := "SELECT id, file_url FROM sboms "
+	var filterExist bool
+	if id != 0 {
+		query += fmt.Sprintf("where id = %d", id)
+		filterExist = true
+	} else if tool != "" {
+		if filterExist {
+			query += " and creator LIKE '%" + tool + "%'"
+			filterExist = true
+		} else {
+			query += " where creator LIKE '%" + tool + "%'"
+		}
+	}
+	query += " limit 50"
+	return query
+}

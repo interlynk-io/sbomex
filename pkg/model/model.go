@@ -34,3 +34,11 @@ type SEARCH struct {
 	SBOMS
 	SCORE
 }
+
+type CMDArgs struct {
+	Id     int32
+	Limit  int32
+	Format string
+	Spec   string
+	Tool   string
+}

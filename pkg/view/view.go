@@ -13,9 +13,8 @@ import (
 	"github.com/interlynk-io/sbomex/pkg/model"
 	"github.com/olekukonko/tablewriter"
 )
-	
 
-func SearchView(ctx context.Context,  sbomex_results []model.SEARCH) {
+func SearchView(ctx context.Context, sbomex_results []model.SEARCH) {
 	outDoc := [][]string{}
 
 	for _, s := range sbomex_results {
