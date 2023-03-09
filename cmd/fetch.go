@@ -44,7 +44,7 @@ func processFetch(ctx context.Context) {
 	}
 	sbomlcDB, _ := db.NewSbomlc()
 	url := sbomlcDB.Url(&model.CMDArgs{
-		Id:   id,
+		Id: id,
 	})
 	if url != "" {
 		http.Get(url)
