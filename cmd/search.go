@@ -1,14 +1,24 @@
 /*
 Copyright © 2023 NAME HERE <EMAIL ADDRESS>
-
 */
 package cmd
 
 import (
+	"context"
 	"fmt"
+
+	"github.com/interlynk-io/sbomex/pkg/db"
+	"github.com/interlynk-io/sbomex/pkg/logger"
+	"github.com/interlynk-io/sbomex/pkg/model"
+	"github.com/interlynk-io/sbomex/pkg/view"
 
 	"github.com/spf13/cobra"
 )
+
+var format string
+var spec string
+var tool string
+var limit int32
 
 // searchCmd represents the search command
 var searchCmd = &cobra.Command{
@@ -21,20 +31,45 @@ Cobra is a CLI library for Go that empowers applications.
 This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
-		fmt.Println("search called")
+		ctx := logger.WithLogger(context.Background())
+		processSearch(ctx)
 	},
 }
 
 func init() {
 	rootCmd.AddCommand(searchCmd)
+	searchCmd.Flags().StringVar(&format, "format", "", "Format options json/xml/tv")
+	searchCmd.Flags().StringVar(&spec, "spec", "", "Spec options spdx/cdx")
+	searchCmd.Flags().StringVar(&tool, "tool", "", "tool name")
+	searchCmd.Flags().Int32Var(&limit, "limit", 25, "max number of search result (default 25)")
+}
 
-	// Here you will define your flags and configuration settings.
+func processSearch(ctx context.Context) {
+	log := logger.FromContext(ctx)
+	log.Debugf("Processing search")
+	if isInValidCMD() {
+		return
+	}
+	sbomlcDB, _ := db.NewSbomlc()
+	view.SearchView(ctx, sbomlcDB.Search(&model.CMDArgs{
+		Format: format,
+		Spec:   spec,
+		Tool:   tool,
+		Limit:  limit,
+	}))
 
-	// Cobra supports Persistent Flags which will work for this command
-	// and all subcommands, e.g.:
-	// searchCmd.PersistentFlags().String("foo", "", "A help for foo")
+}
 
-	// Cobra supports local flags which will only run when this command
-	// is called directly, e.g.:
-	// searchCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+func isInValidCMD() bool {
+	if format != "" && format != "json" && format != "xml" && format != "tv" {
+		fmt.Printf("invalid spec")
+		return true
+	}
+
+	if spec != "" && spec != "spdx" && spec != "cdx" {
+		fmt.Printf("invalid spec")
+		return true
+	}
+
+	return false
 }
