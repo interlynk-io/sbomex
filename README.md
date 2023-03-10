@@ -19,7 +19,7 @@
 [![Go Reference](https://pkg.go.dev/badge/github.com/interlynk-io/sbomex.svg)](https://pkg.go.dev/github.com/interlynk-io/sbomex)
 [![Go Report Card](https://goreportcard.com/badge/github.com/interlynk-io/sbomex)](https://goreportcard.com/report/github.com/interlynk-io/sbomex)
 
-`sbomex` is a command line utility to help query and fetch Interlynk's public SBOM repository. The tool is intended to help familiarize with the specifications and formats of common SBOM standards and the quality of produced SBOMs (See [sbomqs](https://github.com/interlynk-io/sbomqs/) - SBOM Quality Score for how the score is computed). 
+`sbomex` is a command line utility to help query and pull from Interlynk's public SBOM repository. The tool is intended to help familiarize with the specifications and formats of common SBOM standards and the quality of produced SBOMs (See [sbomqs](https://github.com/interlynk-io/sbomqs/) - SBOM Quality Score for how the score is computed). 
 
 The underlying repository is updated periodically with SBOMs from a variety of sources built with many tools.
 
@@ -39,9 +39,9 @@ sbomex search --format json --spec cdx --tool trivy --limit 5
   41   centos:7                 7.38     cdx-json  trivy-0.36.1  
 ```
 
-## `sbomex fetch` : Downloads specified SBOM from the repository and prints to the screen
+## `sbomex pull` : Downloads specified SBOM from the repository and prints to the screen
 ```sh
-sbomex fetch --id 23
+sbomex pull --id 23
  ```
  ```
  {
