@@ -16,9 +16,9 @@ import (
 
 var id int32
 
-// fetchCmd represents the fetch command
-var fetchCmd = &cobra.Command{
-	Use:   "fetch",
+// pullCmd represents the pull command
+var pullCmd = &cobra.Command{
+	Use:   "pull",
 	Short: "Downloads specified SBOM from the repository and prints to the screen",
 	Long: `A longer description that spans multiple lines and likely contains examples
 and usage of using your command. For example:
@@ -28,17 +28,17 @@ This application is a tool to generate the needed files
 to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		ctx := logger.WithLogger(context.Background())
-		processFetch(ctx)
+		processPull(ctx)
 	},
 }
 
 func init() {
-	rootCmd.AddCommand(fetchCmd)
-	fetchCmd.Flags().Int32Var(&id, "id", 0, "Fetch SBOM based on Id (Ignores --filter)")
-	fetchCmd.MarkFlagRequired("id")
+	rootCmd.AddCommand(pullCmd)
+	pullCmd.Flags().Int32Var(&id, "id", 0, "pull SBOM based on Id (Ignores --filter)")
+	pullCmd.MarkFlagRequired("id")
 }
 
-func processFetch(ctx context.Context) {
+func processPull(ctx context.Context) {
 	if isInValidCMD() {
 		return
 	}
