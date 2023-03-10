@@ -23,7 +23,7 @@ var limit int32
 // searchCmd represents the search command
 var searchCmd = &cobra.Command{
 	Use:   "search",
-	Short: "A brief description of your command",
+	Short: "Finds SBOM in the repository that matches the filtering criteria",
 	Long: `A longer description that spans multiple lines and likely contains examples
 and usage of using your command. For example:
 
@@ -38,10 +38,10 @@ to quickly create a Cobra application.`,
 
 func init() {
 	rootCmd.AddCommand(searchCmd)
-	searchCmd.Flags().StringVar(&format, "format", "", "Format options json/xml/tv")
-	searchCmd.Flags().StringVar(&spec, "spec", "", "Spec options spdx/cdx")
-	searchCmd.Flags().StringVar(&tool, "tool", "", "tool name")
-	searchCmd.Flags().Int32Var(&limit, "limit", 25, "max number of search result (default 25)")
+	searchCmd.Flags().StringVar(&format, "format", "", "string SBOM format options json/xml/tv")
+	searchCmd.Flags().StringVar(&spec, "spec", "", "string SBOM Specification options spdx/cdx")
+	searchCmd.Flags().StringVar(&tool, "tool", "", "string SBOM creator tool name (e.g. syft, trivy, bom)")
+	searchCmd.Flags().Int32Var(&limit, "limit", 25, "int max number of search results to print (default 25)")
 }
 
 func processSearch(ctx context.Context) {
@@ -71,5 +71,9 @@ func isInValidCMD() bool {
 		return true
 	}
 
+	if id < 0 {
+		fmt.Println("invalid id")
+		return true
+	}
 	return false
 }

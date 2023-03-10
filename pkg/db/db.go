@@ -60,7 +60,7 @@ func (sl *SBOMLC) Search(ca *model.CMDArgs) []model.SEARCH {
 func (sl *SBOMLC) Url(ca *model.CMDArgs) string {
 	sbomex_results := []*model.SBOMS{}
 	var furl string
-	rows, err := sl.DB.Query(url(ca.Id, ca.Limit, ca.Tool))
+	rows, err := sl.DB.Query(url(ca.Id))
 	if err != nil {
 		fmt.Printf("query execution failed %v", err)
 		return furl
@@ -76,6 +76,7 @@ func (sl *SBOMLC) Url(ca *model.CMDArgs) string {
 		sbomex_results = append(sbomex_results, sbomex_result)
 	}
 	if len(sbomex_results) == 0 {
+		fmt.Println("no record found")
 		return furl
 	}
 	return sbomex_results[utils.RandomPick(0, len(sbomex_results))].FileUrl
