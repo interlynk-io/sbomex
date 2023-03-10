@@ -66,7 +66,10 @@ https://github.com/interlynk-io/sbomex/releases
 ```
 
 ## Using Homebrew
-Coming soon
+```console
+brew tap interlynk-io/interlynk
+brew install sbomex
+```
 
 ## Using Go install
 
