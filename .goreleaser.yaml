@@ -1,4 +1,4 @@
-project_name: sbomqs
+project_name: sbomex
 
 env:
   - GO111MODULE=on
@@ -13,7 +13,7 @@ gomod:
 
 builds:
   - id: binaries 
-    binary: sbomqs-{{ .Os }}-{{ .Arch }}
+    binary: sbomex-{{ .Os }}-{{ .Arch }}
     no_unique_dist_dir: true 
     main: .
     flags:
@@ -28,7 +28,7 @@ builds:
     ldflags:
       - "{{ .Env.LDFLAGS }}"
     env: 
-      - CGO_ENABLED=0
+      - CGO_ENABLED=1
 
 archives:
 - format: binary

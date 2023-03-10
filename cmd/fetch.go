@@ -15,12 +15,11 @@ import (
 )
 
 var id int32
-var filter string
 
 // fetchCmd represents the fetch command
 var fetchCmd = &cobra.Command{
 	Use:   "fetch",
-	Short: "A brief description of your command",
+	Short: "Downloads specified SBOM from the repository and prints to the screen",
 	Long: `A longer description that spans multiple lines and likely contains examples
 and usage of using your command. For example:
 
@@ -36,16 +35,18 @@ to quickly create a Cobra application.`,
 func init() {
 	rootCmd.AddCommand(fetchCmd)
 	fetchCmd.Flags().Int32Var(&id, "id", 0, "Fetch SBOM based on Id (Ignores --filter)")
-	fetchCmd.Flags().StringVar(&filter, "filter", "", "Filter SBOM based on conditions provided")
+	fetchCmd.MarkFlagRequired("id")
 }
 
 func processFetch(ctx context.Context) {
-
+	if isInValidCMD() {
+		return
+	}
 	sbomlcDB, _ := db.NewSbomlc()
-
-	http.Get(sbomlcDB.Url(&model.CMDArgs{
+	url := sbomlcDB.Url(&model.CMDArgs{
 		Id:   id,
-		Tool: filter,
-	}))
-
+	})
+	if url != "" {
+		http.Get(url)
+	}
 }
