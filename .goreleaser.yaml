@@ -28,7 +28,7 @@ builds:
     ldflags:
       - "{{ .Env.LDFLAGS }}"
     env: 
-      - CGO_ENABLED=1
+      - CGO_ENABLED=0
 
 archives:
 - format: binary
