@@ -15,8 +15,14 @@
 package cmd
 
 import (
+	"fmt"
+	"io"
+	"net/http"
 	"os"
+	"path/filepath"
 
+	"github.com/interlynk-io/sbomex/pkg/model"
+	"github.com/schollz/progressbar/v3"
 	"github.com/spf13/cobra"
 )
 
@@ -45,13 +51,47 @@ func Execute() {
 }
 
 func init() {
-	// Here you will define your flags and configuration settings.
-	// Cobra supports persistent flags, which, if defined here,
-	// will be global for your application.
-
-	// rootCmd.PersistentFlags().StringVar(&cfgFile, "config", "", "config file (default is $HOME/.sbomex.yaml)")
-
-	// Cobra also supports local flags, which will only run
-	// when this action is called directly.
 	rootCmd.Flags().BoolP("toggle", "t", false, "Help message for toggle")
+	downloadDB(model.SbomlcDataSource, model.DbLocation)
+}
+
+func downloadDB(path string, url string) {
+	var out *os.File
+	_, err := os.ReadFile(path)
+	if err != nil {
+		err = os.MkdirAll(filepath.Dir(path), os.ModePerm)
+		if err != nil {
+			fmt.Printf("failed to create directory %s", err.Error())
+			return
+		}
+		out, err = os.Create(path)
+		if err != nil {
+			fmt.Printf("failed to create file %s", err.Error())
+			return
+		}
+		defer out.Close()
+
+		resp, err := http.Get(url)
+		if err != nil {
+			fmt.Printf("failed to download file %s", err.Error())
+			return
+		}
+		defer resp.Body.Close()
+
+		if resp.StatusCode != http.StatusOK {
+			fmt.Printf("bad status: %s", resp.Status)
+			return
+		}
+
+		bar := progressbar.DefaultBytes(
+			resp.ContentLength,
+			"downloading db",
+		)
+		_, err = io.Copy(io.MultiWriter(out, bar), resp.Body)
+		if err != nil {
+			fmt.Printf("failed to copy downloaded file: %s", err.Error())
+			return
+		}
+
+	}
 }

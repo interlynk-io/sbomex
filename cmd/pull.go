@@ -46,7 +46,7 @@ func init() {
 
 func processPull(ctx context.Context) error {
 	if isInValidCMD() {
-		return fmt.Errorf("Invalid command")
+		return fmt.Errorf("invalid command")
 	}
 	sbomlcDB, _ := db.NewSbomlc()
 	url := sbomlcDB.Url(&model.CMDArgs{

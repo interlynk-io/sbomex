@@ -16,6 +16,11 @@ package model
 
 import "time"
 
+const (
+	SbomlcDataSource string = ".interlynk-io/sbomex/sqlite3.db"
+	DbLocation       string = "https://github.com/interlynk-io/sbomdb/raw/v0.0.1/sbomlc.db"
+)
+
 type SBOMS struct {
 	ID             int64     `json:"id,omitempty"`
 	Source         string    `json:"source,omitempty"`
