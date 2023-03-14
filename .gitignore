@@ -18,3 +18,4 @@ build/
 version.txt 
 
 dist/
+*.interlynk-io

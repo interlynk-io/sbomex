@@ -29,12 +29,11 @@ type SBOMLC struct {
 }
 
 const (
-	sqliteDriver     string = "sqlite3"
-	sbomlcDataSource string = "./sbomlc.db"
+	sqliteDriver string = "sqlite3"
 )
 
 func NewSbomlc() (*SBOMLC, error) {
-	db, err := sql.Open(sqliteDriver, sbomlcDataSource)
+	db, err := sql.Open(sqliteDriver, model.SbomlcDataSource)
 	if err != nil {
 		log.Panic("Failed to connect database", err)
 		return nil, err
