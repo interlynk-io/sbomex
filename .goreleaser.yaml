@@ -30,9 +30,6 @@ builds:
       - "{{ .Env.LDFLAGS }}"
     env:
       - CGO_ENABLED=0
-    gomips:
-      - hardfloat
-      - softfloat
     no_unique_dist_dir: true
     overrides:
       - env:
