@@ -17,22 +17,19 @@ jobs:
       - run: git fetch --force --tags 
       - uses: actions/setup-go@v3
         with:
-          go-version: '>=1.19'
+          go-version: '>=1.20'
           check-latest: true
           cache: true
       - name: Goreleaser
         uses: goreleaser/goreleaser-action@v4
         with:
-          install-only: true 
+          install-only: true
+          distribution: goreleaser
+          version: latest
+          args: release --clean 
       - run: go version
       - run: goreleaser -v 
       - name: Releaser
         run: make release  
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-    overrides:
-      - goos: darwin
-        goarch: arm64
-        goamd64: v1
-        env:
-          - CGO_ENABLED=1

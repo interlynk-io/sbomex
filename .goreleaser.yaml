@@ -13,22 +13,27 @@ gomod:
 builds:
   - id: binaries 
     binary: sbomex-{{ .Os }}-{{ .Arch }}
-    no_unique_dist_dir: true 
     main: .
     flags:
       - -trimpath 
     mod_timestamp: '{{ .CommitTimestamp }}'
     goos:
       - linux
-      - darwin
       - windows 
     goarch:
       - amd64
+      - arm
+      - arm64
+    goarm:
+      - 7  
     ldflags:
       - "{{ .Env.LDFLAGS }}"
-    env: 
+    env:
       - CGO_ENABLED=0
-
+    no_unique_dist_dir: true
+    overrides:
+      - env:
+         - CGO_ENABLED=1
 archives:
 - format: binary
   name_template: "{{ .Binary }}"
