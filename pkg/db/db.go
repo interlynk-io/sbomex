@@ -19,9 +19,9 @@ import (
 	"fmt"
 	"log"
 
+	_ "github.com/glebarez/go-sqlite"
 	"github.com/interlynk-io/sbomex/pkg/model"
 	"github.com/interlynk-io/sbomex/pkg/utils"
-	_ "github.com/mattn/go-sqlite3"
 )
 
 type SBOMLC struct {
@@ -29,7 +29,7 @@ type SBOMLC struct {
 }
 
 const (
-	sqliteDriver string = "sqlite3"
+	sqliteDriver string = "sqlite"
 )
 
 func NewSbomlc() (*SBOMLC, error) {
