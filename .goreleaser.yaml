@@ -43,24 +43,3 @@ snapshot:
 release:
   prerelease: allow 
   draft: true 
-
-
-sboms:
-  - artifacts: archive
-
-nfpms:
-  - package_name: sbomex
-    homepage: https://github.com/interlynk-io/sbomex/
-    description: |-
-            sbomex installer package. CLI application to generate SHA256 hashes of texts.
-    formats:
-      - rpm
-      - deb
-
-brews:
-  - homepage: 'https://github.com/interlynk-io/sbomex'
-    description: 'Binary distribution for homebrew.'
-    folder: Formula
-    tap:
-      owner: interlynk-io
-      name: sbomex
