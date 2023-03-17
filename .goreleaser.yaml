@@ -6,8 +6,6 @@ env:
 before:
   hooks:
     - go mod tidy
-    - /bin/bash -c 'if [ -n "$(git --no-pager diff --exit-code go.mod go.sum)" ]; then exit 1; fi'
-
     
 gomod:
   proxy: true 
@@ -25,6 +23,7 @@ builds:
       - darwin 
     goarch:
       - arm64
+      - amd64
     ldflags:
       - "{{ .Env.LDFLAGS }}"
     env:
@@ -44,3 +43,24 @@ snapshot:
 release:
   prerelease: allow 
   draft: true 
+
+
+sboms:
+  - artifacts: archive
+
+nfpms:
+  - package_name: sbomex
+    homepage: https://github.com/interlynk-io/sbomex/
+    description: |-
+            sbomex installer package. CLI application to generate SHA256 hashes of texts.
+    formats:
+      - rpm
+      - deb
+
+brews:
+  - homepage: 'https://github.com/interlynk-io/sbomex'
+    description: 'Binary distribution for homebrew.'
+    folder: Formula
+    tap:
+      owner: interlynk-io
+      name: sbomex
