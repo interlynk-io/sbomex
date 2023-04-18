@@ -16,35 +16,47 @@ package db
 
 import (
 	"fmt"
+	"strings"
 )
 
-func search(format, spec, tool string, limit int32) string {
+func addFilter(column, value string, filterExist bool) string {
+	var builder strings.Builder
+	if filterExist {
+		builder.WriteString(" and ")
+	} else {
+		builder.WriteString(" where ")
+	}
+	builder.WriteString(column)
+	builder.WriteString(" LIKE '%")
+	builder.WriteString(value)
+	builder.WriteString("%'")
+	return builder.String()
+}
+
+func search(target string, format, spec, tool string, limit int32) string {
+
 	query := "SELECT id, target, target_version, spec, format, score, creator, creator_version, file_url FROM sboms JOIN scores ON sboms.id = scores.sbom_id "
 	filterExist := false
 	if format != "" {
-		query += fmt.Sprintf(" where sboms.format = '%s'", format)
+		query += addFilter("sboms.format", format, filterExist)
+		filterExist = true
+	}
+
+	if target != "" {
+		query += addFilter("sboms.target || sboms.target_version", target, filterExist)
 		filterExist = true
 	}
 
 	if spec != "" {
-		if filterExist {
-			query += fmt.Sprintf(" and sboms.spec='%s'", spec)
-			filterExist = true
-		} else {
-			query += fmt.Sprintf(" where sboms.spec='%s'", spec)
-			filterExist = true
-		}
+		query += addFilter("sboms.spec", spec, filterExist)
+		filterExist = true
 	}
 
 	if tool != "" {
-		if filterExist {
-			query += " and sboms.creator LIKE '%" + tool + "%'"
-			filterExist = true
-		} else {
-			query += " where sboms.creator LIKE '%" + tool + "%'"
-			filterExist = true
-		}
+		query += addFilter("sboms.creator", tool, filterExist)
+		filterExist = true
 	}
+
 	query += " limit " + fmt.Sprint(limit)
 	return query
 }

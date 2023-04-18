@@ -18,7 +18,7 @@ import "time"
 
 const (
 	SbomlcDataSource string = ".interlynk-io/sbomex/sqlite3.db"
-	DbLocation       string = "https://github.com/interlynk-io/sbomdb/raw/v0.0.1/sbomlc.db"
+	DbLocation       string = "https://github.com/interlynk-io/sbomdb/raw/v0.0.4/sbomlc.db"
 )
 
 type SBOMS struct {
@@ -51,8 +51,9 @@ type SEARCH struct {
 
 type CMDArgs struct {
 	Id     int32
-	Limit  int32
+	Target string
 	Format string
 	Spec   string
 	Tool   string
+	Limit  int32
 }
