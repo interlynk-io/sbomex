@@ -47,7 +47,7 @@ func NewSbomlc() (*SBOMLC, error) {
 func (sl *SBOMLC) Search(ca *model.CMDArgs) []model.SEARCH {
 	sbomex_results := []model.SEARCH{}
 
-	rows, err := sl.DB.Query(search(ca.Format, ca.Spec, ca.Tool, ca.Limit))
+	rows, err := sl.DB.Query(search(ca.Target, ca.Format, ca.Spec, ca.Tool, ca.Limit))
 	if err != nil {
 		fmt.Printf("query execution failed %v", err)
 		return nil

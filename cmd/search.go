@@ -26,6 +26,7 @@ import (
 	"github.com/spf13/cobra"
 )
 
+var target string
 var format string
 var spec string
 var tool string
@@ -35,12 +36,6 @@ var limit int32
 var searchCmd = &cobra.Command{
 	Use:   "search",
 	Short: "Finds SBOM in the repository that matches the filtering criteria",
-	Long: `A longer description that spans multiple lines and likely contains examples
-and usage of using your command. For example:
-
-Cobra is a CLI library for Go that empowers applications.
-This application is a tool to generate the needed files
-to quickly create a Cobra application.`,
 	Run: func(cmd *cobra.Command, args []string) {
 		ctx := logger.WithLogger(context.Background())
 		processSearch(ctx)
@@ -49,6 +44,7 @@ to quickly create a Cobra application.`,
 
 func init() {
 	rootCmd.AddCommand(searchCmd)
+	searchCmd.Flags().StringVar(&target, "target", "", "string SBOM sbom target name (e.g. '%centos%')")
 	searchCmd.Flags().StringVar(&format, "format", "", "string SBOM format options json/xml/tv")
 	searchCmd.Flags().StringVar(&spec, "spec", "", "string SBOM Specification options spdx/cdx")
 	searchCmd.Flags().StringVar(&tool, "tool", "", "string SBOM creator tool name (e.g. syft, trivy, bom)")
@@ -63,6 +59,7 @@ func processSearch(ctx context.Context) {
 	}
 	sbomlcDB, _ := db.NewSbomlc()
 	view.SearchView(ctx, sbomlcDB.Search(&model.CMDArgs{
+		Target: target,
 		Format: format,
 		Spec:   spec,
 		Tool:   tool,
