@@ -28,15 +28,13 @@ The underlying repository is updated periodically with SBOMs from a variety of s
 search commands finds SBOMs in the repository that matches given filtering criteria (specification, format or tool name)
 
 ```sh
-sbomex search --format json --spec cdx --tool trivy --limit 5
+sbomex search --format json --spec cdx --tool trivy --target '%centos%7' --limit 3
 ```
 ```
-  ID   TARGET                   QUALITY  TYPE      CREATOR       
-  5    centos:latest            7.39     cdx-json  trivy-0.36.1  
-  14   centos:centos7.9.2009    7.38     cdx-json  trivy-0.36.1  
-  23   centos:centos7           7.38     cdx-json  trivy-0.36.1  
-  32   centos:7.9.2009          7.38     cdx-json  trivy-0.36.1  
-  41   centos:7                 7.38     cdx-json  trivy-0.36.1  
+  ID  TARGET                 QUALITY  TYPE      CREATOR
+  14  centos:centos7.9.2009  7.38     cdx-json  trivy-0.36.1
+  23  centos:centos7         7.38     cdx-json  trivy-0.36.1
+  32  centos:7.9.2009        7.38     cdx-json  trivy-0.36.1
 ```
 
 ## `sbomex pull` : Downloads specified SBOM from the repository and prints to the screen
