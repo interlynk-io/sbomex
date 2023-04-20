@@ -16,7 +16,6 @@ package cmd
 
 import (
 	"context"
-	"fmt"
 
 	"github.com/interlynk-io/sbomex/pkg/http"
 
@@ -32,9 +31,9 @@ var id int32
 var pullCmd = &cobra.Command{
 	Use:   "pull",
 	Short: "Pulls specified SBOM from the repository and prints to the screen",
-	RunE: func(cmd *cobra.Command, args []string) error {
+	Run: func(cmd *cobra.Command, args []string) {
 		ctx := logger.WithLogger(context.Background())
-		return processPull(ctx)
+		processPull(ctx)
 	},
 }
 
@@ -44,9 +43,9 @@ func init() {
 	pullCmd.MarkFlagRequired("id")
 }
 
-func processPull(ctx context.Context) error {
+func processPull(ctx context.Context) {
 	if isInValidCMD() {
-		return fmt.Errorf("invalid command")
+		return
 	}
 	sbomlcDB, _ := db.NewSbomlc()
 	url := sbomlcDB.Url(&model.CMDArgs{
@@ -55,6 +54,4 @@ func processPull(ctx context.Context) error {
 	if url != "" {
 		http.Get(url)
 	}
-
-	return nil
 }

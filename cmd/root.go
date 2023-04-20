@@ -29,12 +29,12 @@ import (
 // rootCmd represents the base command when called without any subcommands
 var rootCmd = &cobra.Command{
 	Use:   "sbomex",
-	Short: "A brief description of your application",
-	Long: `SBOM Explorer (sbomex) is a command line utility 
-to help query and fetch Interlynk's public SBOM repository. 
-The tool is intended to help familiarize with the specifications 
+	Short: "Find & pull public SBOMs from Interlynk's SBOM repository",
+	Long: `SBOM Explorer (sbomex) is a command line utility
+to help query and fetch Interlynk's public SBOM repository.
+The tool is intended to help familiarize with the specifications
 and formats of common SBOM standards and the quality of produced SBOMs (See sbomqs).
-The underlying repository is updated periodically with SBOMs 
+The underlying repository is updated periodically with SBOMs
 from a variety of sources built with many tools`,
 	// Uncomment the following line if your bare application
 	// has an action associated with it:

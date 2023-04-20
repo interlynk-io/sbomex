@@ -70,17 +70,17 @@ func processSearch(ctx context.Context) {
 
 func isInValidCMD() bool {
 	if format != "" && format != "json" && format != "xml" && format != "tv" {
-		fmt.Printf("invalid spec")
+		fmt.Printf("Invalid format %s: must be one of - json, xml, tv\n", format)
 		return true
 	}
 
 	if spec != "" && spec != "spdx" && spec != "cdx" {
-		fmt.Printf("invalid spec")
+		fmt.Printf("Invalid spec %s: must be one of - spdx, cdx\n", spec)
 		return true
 	}
 
 	if id < 0 {
-		fmt.Println("invalid id")
+		fmt.Printf("invalid id: must be greater than 0\n")
 		return true
 	}
 	return false
