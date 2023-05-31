@@ -15,15 +15,18 @@
 package cmd
 
 import (
+	"context"
 	"fmt"
 	"io"
 	"net/http"
 	"os"
 	"path/filepath"
 
+	"github.com/google/go-github/v52/github"
 	"github.com/interlynk-io/sbomex/pkg/model"
 	"github.com/schollz/progressbar/v3"
 	"github.com/spf13/cobra"
+	version "sigs.k8s.io/release-utils/version"
 )
 
 // rootCmd represents the base command when called without any subcommands
@@ -44,6 +47,7 @@ from a variety of sources built with many tools`,
 // Execute adds all child commands to the root command and sets flags appropriately.
 // This is called by main.main(). It only needs to happen once to the rootCmd.
 func Execute() {
+	checkIfLatestRelease()
 	err := rootCmd.Execute()
 	if err != nil {
 		os.Exit(1)
@@ -93,5 +97,25 @@ func downloadDB(path string, url string) {
 			return
 		}
 
+	}
+}
+
+func checkIfLatestRelease() {
+	if os.Getenv("INTERLYNK_DISABLE_VERSION_CHECK") != "" {
+		return
+	}
+
+	client := github.NewClient(nil)
+	rr, resp, err := client.Repositories.GetLatestRelease(context.Background(), "interlynk-io", "sbomex")
+	if err != nil {
+		panic(err)
+	}
+
+	if resp.StatusCode != 200 {
+		return
+	}
+
+	if rr.GetTagName() != version.GetVersionInfo().GitVersion {
+		fmt.Printf("\nA new version of sbomex is available %s.\n\n", rr.GetTagName())
 	}
 }
