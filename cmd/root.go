@@ -16,12 +16,14 @@ package cmd
 
 import (
 	"context"
+	"database/sql"
 	"fmt"
 	"io"
 	"net/http"
 	"os"
 	"path/filepath"
 
+	_ "github.com/glebarez/go-sqlite"
 	"github.com/google/go-github/v52/github"
 	"github.com/interlynk-io/sbomex/pkg/model"
 	"github.com/schollz/progressbar/v3"
@@ -59,11 +61,26 @@ func init() {
 	downloadDB(model.SbomlcDataSource, model.DbLocation)
 }
 
+func CheckSQLiteDB(filePath string) bool {
+	db, err := sql.Open("sqlite", filePath)
+	if err != nil {
+		return false
+	}
+	defer db.Close()
+
+	err = db.Ping()
+	if err != nil {
+		return false
+	}
+
+	return true
+}
+
 func downloadDB(path string, url string) {
 	var out *os.File
-	_, err := os.ReadFile(path)
-	if err != nil {
-		err = os.MkdirAll(filepath.Dir(path), os.ModePerm)
+	isValidDB := CheckSQLiteDB(path)
+	if !isValidDB {
+		var err = os.MkdirAll(filepath.Dir(path), os.ModePerm)
 		if err != nil {
 			fmt.Printf("failed to create directory %s", err.Error())
 			return

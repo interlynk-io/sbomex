@@ -18,7 +18,7 @@ import "time"
 
 const (
 	SbomlcDataSource string = ".interlynk-io/sbomex/sqlite3.db"
-	DbLocation       string = "https://github.com/interlynk-io/sbomdb/raw/v0.0.5/sbomlc.db"
+	DbLocation       string = "https://github.com/interlynk-io/sbomdb/raw/v0.0.4/sbomlc.db"
 )
 
 type SBOMS struct {
