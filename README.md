@@ -54,7 +54,33 @@ sbomex pull --id 23
 	"dataLicense": "CC0-1.0",
  ...
  ```
- 
+
+#### Using containerized sbomex
+
+```sh
+$docker run ghcr.io/interlynk-io/sbomqs [search|pull] [options]
+```
+Example
+```sh
+docker run ghcr.io/interlynk-io/sbomex:latest search --format json --spec cdx --tool trivy --target '%box%' --limit 3
+```
+```
+Unable to find image 'ghcr.io/interlynk-io/sbomex:latest' locally
+latest: Pulling from interlynk-io/sbomex
+bc89d6624a71: Already exists
+bacb9c1935ff: Already exists
+Digest: sha256:a00682b085fd21b7f071245a4d62d4825a07d9e783a8dfcda6b1f30f6a49514c
+Status: Downloaded newer image for ghcr.io/interlynk-io/sbomex:latest
+downloading db 100% |███████████████████████████| (89/89 MB, 5.4 MB/s)
+
+A new version of sbomex is available v0.0.6.
+
+  ID   TARGET          QUALITY  TYPE      CREATOR
+  95   busybox:latest  3.25     cdx-json  trivy-0.36.1
+  104  busybox:uclibc  3.25     cdx-json  trivy-0.36.1
+  113  busybox:musl    3.25     cdx-json  trivy-0.36.1
+```
+
 # Installation 
 
 ## Using Prebuilt binaries 
