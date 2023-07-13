@@ -35,6 +35,7 @@ require (
 )
 
 require (
+	github.com/Masterminds/semver/v3 v3.2.1
 	github.com/common-nighthawk/go-figure v0.0.0-20210622060536-734e95fb86be // indirect
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
 	github.com/mattn/go-runewidth v0.0.14 // indirect

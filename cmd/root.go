@@ -23,6 +23,7 @@ import (
 	"os"
 	"path/filepath"
 
+	"github.com/Masterminds/semver/v3"
 	_ "github.com/glebarez/go-sqlite"
 	"github.com/google/go-github/v52/github"
 	"github.com/interlynk-io/sbomex/pkg/model"
@@ -132,7 +133,18 @@ func checkIfLatestRelease() {
 		return
 	}
 
-	if rr.GetTagName() != version.GetVersionInfo().GitVersion {
+	verLatest, err := semver.NewVersion(version.GetVersionInfo().GitVersion)
+	if err != nil {
+		return
+	}
+
+	verInstalled, err := semver.NewVersion(rr.GetTagName())
+	if err != nil {
+		return
+	}
+
+	result := verInstalled.Compare(verLatest)
+	if result < 0 {
 		fmt.Printf("\nA new version of sbomex is available %s.\n\n", rr.GetTagName())
 	}
 }
