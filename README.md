@@ -58,7 +58,7 @@ sbomex pull --id 23
 #### Using containerized sbomex
 
 ```sh
-$docker run ghcr.io/interlynk-io/sbomqs [search|pull] [options]
+docker run ghcr.io/interlynk-io/sbomex [search|pull] [options]
 ```
 Example
 ```sh
