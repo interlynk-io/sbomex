@@ -18,6 +18,8 @@
 
 [![Go Reference](https://pkg.go.dev/badge/github.com/interlynk-io/sbomex.svg)](https://pkg.go.dev/github.com/interlynk-io/sbomex)
 [![Go Report Card](https://goreportcard.com/badge/github.com/interlynk-io/sbomex)](https://goreportcard.com/report/github.com/interlynk-io/sbomex)
+[![OpenSSF Scorecard](https://api.securityscorecards.dev/projects/github.com/interlynk-io/sbomex/badge)](https://securityscorecards.dev/viewer/?uri=github.com/interlynk-io/sbomex)
+![GitHub all releases](https://img.shields.io/github/downloads/interlynk-io/sbomex/total)
 
 `sbomex` is a command line utility to help query and pull from Interlynk's public SBOM repository. The tool is intended to help familiarize with the specifications and formats of common SBOM standards and the quality of produced SBOMs (See [sbomqs](https://github.com/interlynk-io/sbomqs/) - SBOM Quality Score for how the score is computed). 
 
