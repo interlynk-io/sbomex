@@ -81,6 +81,10 @@ A new version of sbomex is available v0.0.6.
   113  busybox:musl    3.25     cdx-json  trivy-0.36.1
 ```
 
+# SBOM Card 
+[![SBOMCard](https://api.interlynk.io/api/v1/badges?type=hcard&project_group_id=d6fbe787-51e6-44bc-a691-f792fb581f63
+)](https://app.interlynk.io/customer/products?id=d6fbe787-51e6-44bc-a691-f792fb581f63&signed_url_params=eyJfcmFpbHMiOnsibWVzc2FnZSI6IkltVTJObUl4T0RFNUxUSXpaR1l0TkdFM09DMDRZVEptTFRkbE1EYzJZak13TTJJMk5pST0iLCJleHAiOm51bGwsInB1ciI6InNoYXJlX2x5bmsvc2hhcmVfbHluayJ9fQ==--9ab55c63454b3144b175f0439119cb442b5eae1bbfc5f18a9639a69d89487396)
+
 # Installation 
 
 ## Using Prebuilt binaries 
