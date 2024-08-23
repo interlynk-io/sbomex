@@ -4,6 +4,7 @@ go 1.19
 
 require (
 	github.com/glebarez/go-sqlite v1.21.0
+	github.com/google/go-github/v52 v52.0.0
 	github.com/olekukonko/tablewriter v0.0.5
 	github.com/spf13/cobra v1.6.1
 	go.uber.org/zap v1.24.0
@@ -15,7 +16,6 @@ require (
 	github.com/cloudflare/circl v1.1.0 // indirect
 	github.com/dustin/go-humanize v1.0.1 // indirect
 	github.com/golang/protobuf v1.5.2 // indirect
-	github.com/google/go-github/v52 v52.0.0 // indirect
 	github.com/google/go-querystring v1.1.0 // indirect
 	github.com/google/uuid v1.3.0 // indirect
 	github.com/mattn/go-isatty v0.0.17 // indirect
