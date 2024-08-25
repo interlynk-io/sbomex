@@ -32,6 +32,27 @@ builds:
     ignore:
       - goos: windows
         goarch: arm64
+
+nfpms:
+  - id: sbomex
+    package_name: sbomex
+    file_name_template: "{{ .ConventionalFileName }}"
+    vendor: Interlynk
+    homepage: https://interlynk.io
+    maintainer: Interlynk Authors hello@interlynk.io
+    builds:
+      - binaries
+    description: Find & pull public SBOMs
+    license: "Apache License 2.0"
+    formats:
+      - apk
+      - deb
+      - rpm
+    contents:
+      - src: /usr/bin/sbomex-{{ .Os }}-{{ .Arch }}
+        dst: /usr/bin/sbomex
+        type: "symlink"
+
 archives:
 - format: binary
   name_template: "{{ .Binary }}"
