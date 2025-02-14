@@ -23,8 +23,8 @@
 
 The underlying repository is updated periodically with SBOMs from a variety of sources built with many tools.
 
-
 ## `sbomex search` : Search repository for matching SBOMs
+
 search commands finds SBOMs in the repository that matches given filtering criteria (specification, format or tool name)
 
 ```sh
@@ -38,6 +38,7 @@ sbomex search --format json --spec cdx --tool trivy --target '%centos%7' --limit
 ```
 
 ## `sbomex pull` : Downloads specified SBOM from the repository and prints to the screen
+
 ```sh
 sbomex pull --id 23
  ```
@@ -55,15 +56,18 @@ sbomex pull --id 23
  ...
  ```
 
-#### Using containerized sbomex
+### Using containerized sbomex
 
 ```sh
 docker run ghcr.io/interlynk-io/sbomex [search|pull] [options]
 ```
+
 Example
+
 ```sh
 docker run ghcr.io/interlynk-io/sbomex:latest search --format json --spec cdx --tool trivy --target '%box%' --limit 3
 ```
+
 ```
 Unable to find image 'ghcr.io/interlynk-io/sbomex:latest' locally
 latest: Pulling from interlynk-io/sbomex
@@ -81,7 +85,8 @@ A new version of sbomex is available v0.0.6.
   113  busybox:musl    3.25     cdx-json  trivy-0.36.1
 ```
 
-# SBOM Card 
+# SBOM Card
+
 [![SBOMCard](https://api.interlynk.io/api/v1/badges?type=hcard&project_group_id=d6fbe787-51e6-44bc-a691-f792fb581f63
 )](https://app.interlynk.io/customer/products?id=d6fbe787-51e6-44bc-a691-f792fb581f63&signed_url_params=eyJfcmFpbHMiOnsibWVzc2FnZSI6IkltVTJObUl4T0RFNUxUSXpaR1l0TkdFM09DMDRZVEptTFRkbE1EYzJZak13TTJJMk5pST0iLCJleHAiOm51bGwsInB1ciI6InNoYXJlX2x5bmsvc2hhcmVfbHluayJ9fQ==--9ab55c63454b3144b175f0439119cb442b5eae1bbfc5f18a9639a69d89487396)
 
@@ -94,6 +99,7 @@ https://github.com/interlynk-io/sbomex/releases
 ```
 
 ## Using Homebrew
+
 ```console
 brew tap interlynk-io/interlynk
 brew install sbomex
@@ -110,12 +116,12 @@ go install github.com/interlynk-io/sbomex@latest
 This approach invovles cloning the repo and building it. 
 
 1. Clone the repo `git clone git@github.com:interlynk-io/sbomex.git`
-2. `cd` into `sbomex` folder 
+2. `cd` into `sbomex` folder
 3. make build
 4. To test if the build was successful run the following command `./build/sbomex version`
 
-
 # Contributions
+
 We look forward to your contributions, below are a few guidelines on how to submit them 
 
 - Fork the repo
@@ -125,20 +131,25 @@ We look forward to your contributions, below are a few guidelines on how to subm
 - Create a new pull-request
 
 # Other SBOM Open Source tools
-- [SBOM Assembler](https://github.com/interlynk-io/sbomasm) - A tool to compose a single SBOM by combining other (part) SBOMs
-- [SBOM Quality Score](https://github.com/interlynk-io/sbomqs) - A tool for evaluating the quality and completeness of SBOMs
-- [SBOM Search Tool](https://github.com/interlynk-io/sbomagr) - A tool to grep style semantic search in SBOMs
-- [SBOM Explorer](https://github.com/interlynk-io/sbomex) - A tool for discovering and downloading SBOM from a public repository
 
-# Contact 
+- [SBOM Assembler](https://github.com/interlynk-io/sbomasm) - A tool to compose a single SBOM by combining other (part) SBOMs
+- [Automated SBOM Transfer](https://github.com/interlynk-io/sbommv) - A primary tool to transfer SBOM's between different systems.
+
+- [SBOM Quality Score](https://github.com/interlynk-io/sbomqs) - A tool for evaluating the quality and completeness of SBOMs
+- [SBOM Search Tool](https://github.com/interlynk-io/sbomgr) - A tool to grep style semantic search in SBOMs
+- [SBOM Benchmark](https://www.sbombenchmark.dev) is a repository of SBOM and quality score for most popular containers and repositories
+
+# Contact
+
 We appreciate all feedback. The best ways to get in touch with us:
+
 - :phone: [Live Chat](https://www.interlynk.io/#hs-chat-open)
 - 📫 [Email Us](mailto:hello@interlynk.io)
-- 🐛 [Report a bug or enhancement](https://github.com/interlynk-io/sbomex/issues) 
+- 🐛 [Report a bug or enhancement](https://github.com/interlynk-io/sbomex/issues)
 - :x: [Follow us on X](https://twitter.com/InterlynkIo)
 
 # Stargazers
 
-If you like this project, please support us by starring it. 
+If you like this project, please support us by starring it.
 
 [![Stargazers](https://starchart.cc/interlynk-io/sbomex.svg)](https://starchart.cc/interlynk-io/sbomex)
