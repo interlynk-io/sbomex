@@ -23,14 +23,11 @@
 
 The underlying repository is updated periodically with SBOMs from a variety of sources built with many tools.
 
-# SBOM Card
+## Interlynk Free Tier — Full SBOM Compliance, Zero Friction
 
-[![SBOMCard](https://api.interlynk.io/api/v1/badges?type=hcard&project_group_id=d6fbe787-51e6-44bc-a691-f792fb581f63
-)](https://app.interlynk.io/customer/products?id=d6fbe787-51e6-44bc-a691-f792fb581f63&signed_url_params=eyJfcmFpbHMiOnsibWVzc2FnZSI6IkltVTJObUl4T0RFNUxUSXpaR1l0TkdFM09DMDRZVEptTFRkbE1EYzJZak13TTJJMk5pST0iLCJleHAiOm51bGwsInB1ciI6InNoYXJlX2x5bmsvc2hhcmVfbHluayJ9fQ==--9ab55c63454b3144b175f0439119cb442b5eae1bbfc5f18a9639a69d89487396)
+Get started with SBOM compliance in under two minutes — no credit card, no time limit. Interlynk's free plan includes a guided setup where you pick your compliance standard (CRA/EU, FDA Cybersecurity, NTIA, or Telecom), upload your SBOM, and instantly see your compliance score with actionable gaps highlighted. You get compliance scoring against one standard, up to 5 products with 5 versions each, unlimited users, built-in vulnerability detection, API access for CI/CD integration, weekly compliance digests, and ShareLynk — a public link to share your compliance posture with customers and partners. Everything beyond the free tier is visible with a clear upgrade path, and you can start a 15-day Enterprise trial anytime to unlock unlimited products, SBOM automation, RBAC, analytics, license management, and workflow integrations. [**Get Started Free →**](https://app.interlynk.io)
 
-# SBOM Platform - Free Community Tier
-
-Our SBOM Automation Platform has a free community tier that provides a comprehensive solution to manage SBOMs (Software Bill of Materials) effortlessly. From centralized SBOM storage, built-in SBOM editor, continuous vulnerability mapping and assessment, and support for organizational policies, all while ensuring compliance and enhancing software supply chain security using integrated SBOM quality scores. The community tier is ideal for small teams. Learn more [here](https://www.interlynk.io/community-tier) or [Sign up](https://app.interlynk.io/auth)
+📊 **Check your SBOM compliance instantly** directly from your browser in just one click: <https://demo.interlynk.io/>
 
 ## `sbomex search` : Search repository for matching SBOMs
 
